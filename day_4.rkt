@@ -9,16 +9,16 @@
       (range-encloses? range-y range-x))))
 
 (define (parse-job-range range-str)
-  (~> range-str (string-split _ "-") (map string->number _) (apply closed-range _)))
+  (~>> range-str (string-split _ "-") (map string->number) (apply closed-range)))
 
 (define (parse-jobs-pair pair-str)
   (~> pair-str string-trim (string-split _ "," ) (map parse-job-range _)))
 
 (define (parse-part-1 in-sequence)
-    (~> in-sequence (sequence-map parse-jobs-pair _) (sequence-count full-contain?  _)))
+    (~>> in-sequence (sequence-map parse-jobs-pair) (sequence-count full-contain?)))
 
 (define (parse-part-2 in-sequence)
-    (~> in-sequence (sequence-map parse-jobs-pair _) (sequence-count (lambda (rs) (apply range-overlaps? rs))  _)))
+    (~>> in-sequence (sequence-map parse-jobs-pair) (sequence-count (lambda (rs) (apply range-overlaps? rs)))))
 
 (define (day-4 input parse-proc)
   (call-with-input-file
